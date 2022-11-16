@@ -6,7 +6,8 @@ This repo is a set of instructions to get offlineimap working with MS 365 accoun
 # file: .offlineimaprc
 These lines must be in the offlineimaprc file:
 
-[Repository remoteOutlook]
+
+```[Repository remoteOutlook]
 type = IMAP
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
@@ -21,7 +22,7 @@ oauth2_tenant_id = 5f4af3ad-8646-414b-83d8-ef95a0f39e42
 oauth2_client_id = 08162f7c-0fd2-4200-a84a-f25a4db0b584
 oauth2_client_secret = TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82
 realdelete = no
-folderfilter = lambda folder: folder in ['Sent','INBOX','Archive']
+folderfilter = lambda folder: folder in ['Sent','INBOX','Archive']```
 
 The values oauth2_access_token_eval is found in the offlineimap.py file. It reads in the value of the access_token created by the get_token.py file.
 
