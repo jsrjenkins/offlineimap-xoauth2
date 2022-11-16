@@ -3,11 +3,19 @@ Using offlineimap with MS Office 365 and oauth2 authentication
 
 This repo is a set of instructions to get offlineimap working with MS 365 account using only oauth2 athentication.
 
+You will need the project https://github.com/UvA-FNWI/M365-IMAP  also installed. I have put it in the ~/Source directory but it can go anywhere. You will need to at least call the function
+```
+python3 get_token.py
+```
+At least once to produce the tokens. It will need to be called each time you change your password.
+
+Change the .offlineimap.py file to represent where you have put the M365-IMAP project.
+
 # file: .offlineimaprc
 These lines must be in the offlineimaprc file:
 
-
-```[Repository remoteOutlook]
+```
+[Repository remoteOutlook]
 type = IMAP
 ssl = yes
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
@@ -25,7 +33,10 @@ realdelete = no
 folderfilter = lambda folder: folder in ['Sent','INBOX','Archive']
 ```
 
-The values oauth2_access_token_eval is found in the offlineimap.py file. It reads in the value of the access_token created by the get_token.py file.
+# file: .offlineimap.py
+The values oauth2_access_token_eval is found in the offlineimap.py file. It reads in the value of the access_token created by the get_token.py file. This token is saved in the same directory as the M365-IMAP project folder.
+
+Note also that the offlineimap.py file also contains a script to get the password from an encrypted .authinfo.gpg file (function get_authinfo_password). Theoretically this can be used to access also the token, but that is left as an exercize to the reader.
 
 The oauth2_tenant_id is found with the m365 cli tool:
 ```
@@ -37,5 +48,5 @@ sudo npm install -g @pnp/cli-microsoft365
 ```
 (sudo for global install)
 
-the oauth2_client_id and oauth2_client_secret is taken from the https://github.com/UvA-FNWI/M365-IMAP config.py file
+the oauth2_client_id and oauth2_client_secret is taken from the https://github.com/UvA-FNWI/M365-IMAP config.py file. If you have your own Azure app you can replace these values.
 
