@@ -34,6 +34,7 @@ remoteport = 993
 auth_mechanisms = XOAUTH2
 oauth2_request_url = https://login.microsoftonline.com/common/oauth2/v2.0/token
 oauth2_access_token_eval = get_token()
+oauth2_refresh_token_eval = "cd /home/jenkins/Source/M365-IMAP/; python3 refresh_token.py" 
 oauth2_tenant_id = 5f4af3ad-8646-414b-83d8-ef95a0f39e42
 oauth2_client_id = 08162f7c-0fd2-4200-a84a-f25a4db0b584
 oauth2_client_secret = TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82
