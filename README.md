@@ -34,6 +34,22 @@ folderfilter = lambda folder: folder in ['Sent','INBOX','Archive']
 ```
 
 # file: .offlineimap.py
+```
+#!/usr/bin/python
+import re, os
+ 
+def get_authinfo_password(machine, login, port):
+    s = "machine %s login %s password ([^ ]*) port %s" % (machine, login, port)
+    p = re.compile(s)
+    authinfo = os.popen("gpg -q --no-tty -d ~/.authinfo.gpg").read()
+    return p.search(authinfo).group(1)
+
+def get_token():
+    token_file = open("/home/jenkins/Source/M365-IMAP/imap_smtp_access_token", "r")
+    data = token_file.read()
+    token_file.close()
+    return data
+```
 The values oauth2_access_token_eval is found in the offlineimap.py file. It reads in the value of the access_token created by the get_token.py file. This token is saved in the same directory as the M365-IMAP project folder.
 
 Note also that the offlineimap.py file also contains a script to get the password from an encrypted .authinfo.gpg file (function get_authinfo_password). Theoretically this can be used to access also the token, but that is left as an exercize to the reader.
