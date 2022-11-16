@@ -9,6 +9,14 @@ python3 get_token.py
 ```
 At least once to produce the tokens. It will need to be called each time you change your password.
 
+I had to moodify the config.py file with the following line:
+
+```
+Authority = "https://login.microsoftonline.com/5f4af3ad-8646-414b-83d8-ef95a0f39e42"
+````
+
+Note the last part of this url is simply the tenant_id, which you can find below. 
+
 Change the .offlineimap.py file to represent where you have put the M365-IMAP project.
 
 # file: .offlineimaprc
