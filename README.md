@@ -54,6 +54,8 @@ The values oauth2_access_token_eval is found in the offlineimap.py file. It read
 
 Note also that the offlineimap.py file also contains a script to get the password from an encrypted .authinfo.gpg file (function get_authinfo_password). Theoretically this can be used to access also the token, but that is left as an exercize to the reader.
 
+# oauth2_tenant_id
+
 The oauth2_tenant_id is found with the m365 cli tool:
 ```
 m365 tenant id get
