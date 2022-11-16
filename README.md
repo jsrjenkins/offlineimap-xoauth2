@@ -23,15 +23,18 @@ oauth2_client_id = 08162f7c-0fd2-4200-a84a-f25a4db0b584
 oauth2_client_secret = TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82
 realdelete = no
 folderfilter = lambda folder: folder in ['Sent','INBOX','Archive']
-
+```
 
 The values oauth2_access_token_eval is found in the offlineimap.py file. It reads in the value of the access_token created by the get_token.py file.
 
 The oauth2_tenant_id is found with the m365 cli tool:
-```m365 tenant id get
-
+```
+m365 tenant id get
+```
 Note that the m365 tool is simply installed with the following:
-```sudo npm install -g @pnp/cli-microsoft365
+```
+sudo npm install -g @pnp/cli-microsoft365
+```
 (sudo for global install)
 
 the oauth2_client_id and oauth2_client_secret is taken from the https://github.com/UvA-FNWI/M365-IMAP config.py file
