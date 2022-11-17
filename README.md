@@ -33,8 +33,7 @@ remotehost = outlook.office365.com
 remoteport = 993
 auth_mechanisms = XOAUTH2
 oauth2_request_url = https://login.microsoftonline.com/common/oauth2/v2.0/token
-oauth2_access_token_eval = get_token()
-oauth2_refresh_token_eval = "cd /home/jenkins/Source/M365-IMAP/; python3 refresh_token.py" 
+oauth2_access_token_eval = get_access_token()
 oauth2_tenant_id = 5f4af3ad-8646-414b-83d8-ef95a0f39e42
 oauth2_client_id = 08162f7c-0fd2-4200-a84a-f25a4db0b584
 oauth2_client_secret = TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82
@@ -44,22 +43,26 @@ folderfilter = lambda folder: folder in ['Sent','INBOX','Archive']
 
 # file: .offlineimap.py
 ```
-#!/usr/bin/python
-import re, os
- 
 def get_authinfo_password(machine, login, port):
     s = "machine %s login %s password ([^ ]*) port %s" % (machine, login, port)
     p = re.compile(s)
     authinfo = os.popen("gpg -q --no-tty -d ~/.authinfo.gpg").read()
     return p.search(authinfo).group(1)
 
-def get_token():
+def get_access_token():
     token_file = open("/home/jenkins/Source/M365-IMAP/imap_smtp_access_token", "r")
     data = token_file.read()
     token_file.close()
     return data
+
+def get_refresh_token():
+    refresh_token = os.popen("cd /home/jenkins/Source/M365-IMAP/; python3 refresh_token.py")
+    token_file = open("/home/jenkins/Source/M365-IMAP/imap_smtp_refresh_token", "r")
+    data = token_file.read()
+    token_file.close
+    return data
 ```
-The values oauth2_access_token_eval is found in the offlineimap.py file. It reads in the value of the access_token created by the get_token.py file. This token is saved in the same directory as the M365-IMAP project folder.
+The values oauth2_access_token_eval is found in the offlineimap.py file. It reads in the value of the access_token created by the get_token.py file. This token is saved in the same directory as the M365-IMAP project folder. Similarly the refresh token function, which first calls the script to refresh the token from the server.
 
 Note also that the offlineimap.py file also contains a script to get the password from an encrypted .authinfo.gpg file (function get_authinfo_password). Theoretically this can be used to access also the token, but that is left as an exercize to the reader.
 
