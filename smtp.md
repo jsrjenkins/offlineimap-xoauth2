@@ -1,6 +1,6 @@
    # this isn't finished
    
-   `
+   ```
    ;;; Call the oauth2ms program to fetch the authentication token
    (defun fetch-access-token ()
      (with-temp-buffer
@@ -25,4 +25,4 @@
 	  smtpmail-smtp-server         "smtp.example.com"
 	  smtpmail-stream-type  'starttls
 	  smtpmail-smtp-service 587)
-    `
+  ```
