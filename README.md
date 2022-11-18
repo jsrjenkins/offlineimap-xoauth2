@@ -80,3 +80,5 @@ sudo npm install -g @pnp/cli-microsoft365
 
 the oauth2_client_id and oauth2_client_secret is taken from the https://github.com/UvA-FNWI/M365-IMAP config.py file. If you have your own Azure app you can replace these values.
 
+# repeat offlineimap
+Sometimes the authentication just fails on the first attempt and then needs to simply be repeated. It works on the second try. Most likely this is due to the refresh_token taking more time before it proceeds to authentication.
